@@ -122,7 +122,7 @@ export default function Market() {
                 }).then(response => {
                     toast.success('Pagamento realizado com sucesso.');
                     handleClosePaymentModal();
-                    localStorage.setItem('cart', []);
+                    localStorage.setItem('cart', JSON.stringify([]));
                 }).catch(error => {
                     toast.error('Algo deu errado ao processar o pagamento.');
                     handleClosePaymentModal();
