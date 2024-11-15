@@ -122,7 +122,7 @@ export default function Market() {
                 }).then(response => {
                     toast.success('Pagamento realizado com sucesso.');
                     handleClosePaymentModal();
-                    localStorage.setItem('cart', null);
+                    localStorage.setItem('cart', []);
                 }).catch(error => {
                     toast.error('Algo deu errado ao processar o pagamento.');
                     handleClosePaymentModal();
@@ -141,7 +141,7 @@ export default function Market() {
     return (
         <MarketComponent>
             <MarketCartList>
-                {!cart ?
+                {cart.length === 0 ?
                     <Container>
                         <FaShoppingBasket style={{ marginBottom: 10 }} size={48} />
                         <MarketEmptyCartText>CARRINHO VAZIO</MarketEmptyCartText>
