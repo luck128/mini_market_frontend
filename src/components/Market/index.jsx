@@ -8,6 +8,8 @@ import {
     MarketCartList,
     MarketActions,
     MarketActionButton,
+    DescriptionTotalValue,
+    TotalValueSpan,
     MarketEmptyCartText,
     MarketCartProductItem,
     MarketCartItemInfoComponent,
@@ -45,6 +47,7 @@ import PaymentModal from "../Modal/Payment";
 
 export default function Market() {
     const [cart, setCart] = useState([]);
+    const [totalValue, setTotalValue] = useState(0);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [paymentModal, setPaymentModal] = useState(false);
 
@@ -135,7 +138,24 @@ export default function Market() {
     }
 
     useEffect(() => {
-        setCart(JSON.parse(localStorage.getItem('cart')));
+        const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+        setCart(storedCart);
+
+        function getTotalValueInCart() {
+            const total = storedCart.reduce((acc, item) => {
+                const itemTotal = parseFloat(item.price) * item.quantity;
+                return acc + itemTotal;
+            }, 0);
+
+            const formattedTotal = total.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+            });
+    
+            setTotalValue(formattedTotal);
+        }
+
+        getTotalValueInCart();
     },[localStorage.getItem('cart')])
 
     return (
@@ -195,8 +215,16 @@ export default function Market() {
                     style={{ backgroundColor: 'transparent', border: '1px solid #008aff', color: '#008aff' }}
                     onClick={handleModal}
                 >
-                        PROCURAR PRODUTO
-                    </MarketActionButton>
+                    PROCURAR PRODUTO
+                </MarketActionButton>
+                <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column' }}>
+                    <DescriptionTotalValue>
+                        Valor Total
+                    </DescriptionTotalValue>
+                    <TotalValueSpan>
+                        {totalValue}
+                    </TotalValueSpan>
+                </div>
                 <MarketActionButton 
                     style={{ backgroundColor: cart.length === 0 ? '#4cabfc' : '#008aff', cursor: cart.length === 0 ? 'not-allowed' : 'pointer', color: '#FFF' }}
                     disabled={cart.length === 0}
