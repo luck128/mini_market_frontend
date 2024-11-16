@@ -42,8 +42,12 @@ http://localhost:3000
 ## 📂 Estrutura do Projeto
 
 src/
+
 ├── components/      # Componentes reutilizáveis
+
 ├── pages/           # Páginas principais (Mercado, Geladeira)
+
 ├── services/        # Comunicação com a API
-├── utils/           # Funções auxiliares
-└── App.jsx          # Configuração principal da aplicação
+
+└── App.js          # Configuração principal da aplicação
+
