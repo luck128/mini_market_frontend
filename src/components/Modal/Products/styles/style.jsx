@@ -50,7 +50,7 @@ export const ProductButton = styled.button({
     justifyContent: 'center',
     alignItems: 'center',
     outline: 'none',
-    border: '1px solid #68baff',
+    border: '1.8px solid #68baff',
     color: '#68baff',
     borderRadius: 999,
     width: 40,
