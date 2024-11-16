@@ -30,8 +30,7 @@ import {
 /**
  * @description Serviços para funcionalidade do carrinho
  */
-import getProductsListService from '../../../services/Cart/cart.services';
-import addToCartService from '../../../services/Cart/cart.services';
+import { getProductsListService, addToCartService } from '../../../services/Cart/cart.services';
 
 export default function ProductsModal({ isOpen, onClose }) {
     const [cart, setCart] = useState(() => {
@@ -51,12 +50,31 @@ export default function ProductsModal({ isOpen, onClose }) {
 
     const addToCart = async (productId) => {
         try {
-            const response = await addToCartService();
-            toast.info(response);
+            const newProduct = await addToCartService(productId);
+    
+            if (newProduct[0].quantity !== 0) {
+                setCart((prevCart) => {
+                    const existingProduct = prevCart.find(item => item.id === newProduct[0].id);
+    
+                    if (existingProduct) {
+                        return prevCart.map(item =>
+                            item.id === newProduct[0].id
+                                ? { ...item, quantity: item.quantity + 1 }
+                                : item
+                        );
+                    } else {
+                        return [...prevCart, { ...newProduct[0], quantity: 1, qty_stock: newProduct[0].quantity }];
+                    }
+                });
+    
+                toast.success('Produto adicionado ao carrinho!');
+            } else {
+                toast.warn('O estoque do produto acabou, tente procurar outro semelhante.');
+            }
         } catch (error) {
-            toast.error(error);
+            toast.error('Erro ao adicionar produto ao carrinho');
         }
-    }
+    };
 
     useEffect(() => {
         getProductsList();
