@@ -42,6 +42,23 @@ export const MarketActionButton = styled.button({
     cursor: 'pointer'
 });
 
+export const DescriptionTotalValue = styled.span`
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #A3A3A3;
+
+    @media (max-width: 768px) {
+        display: none;
+    }
+`;
+
+export const TotalValueSpan = styled.span({
+    fontFamily: 'Inter',
+    fontSize: 16,
+    fontWeight: 600
+});
+
 export const Container = styled.div({
     display: 'flex',
     flexDirection: 'column',
