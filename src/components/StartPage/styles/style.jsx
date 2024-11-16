@@ -24,6 +24,7 @@ export const StartPageAlignComponent = styled.div`
     gap: 85px;
 
     @media (max-width: 820px) {
+        padding-top: 25px;
         flex-direction: column;
         gap: 20px;
     }
@@ -38,8 +39,8 @@ export const StartPageButton = styled.button`
     background-color: #b1e1ec;
     outline: none;
     border: none;
-    width: 380px;
-    height: 380px;
+    width: 340px;
+    height: 340px;
     border-radius: 18px;
     gap: 15px;
     cursor: pointer;
