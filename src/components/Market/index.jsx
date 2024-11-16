@@ -198,8 +198,8 @@ export default function Market() {
                         PROCURAR PRODUTO
                     </MarketActionButton>
                 <MarketActionButton 
-                    style={{ backgroundColor: '#008aff', color: '#FFF' }}
-                    disabled={cart === null}
+                    style={{ backgroundColor: cart.length === 0 ? '#4cabfc' : '#008aff', cursor: cart.length === 0 ? 'not-allowed' : 'pointer', color: '#FFF' }}
+                    disabled={cart.length === 0}
                     onClick={() => {
                         handleOpenPaymentModal();
                         handlePaymentProducts();
