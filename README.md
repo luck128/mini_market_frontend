@@ -14,7 +14,7 @@ Interface para o sistema de autoatendimento em Mini Markets, permitindo que usu�
   - **Mercado**: Produtos secos como salgados, doces e chocolates, entre outros.
   - **Geladeira**: Seleção de uma geladeira próxima à localização do usuário, com opção de abertura para pegar bebidas.
 - [x] **Carrinho de compras**: Adicione itens e realize o pagamento.
-- [] **Abertura de Geladeira**: Abertura da geladeira via localização do usuário.
+- [ ] **Abertura de Geladeira**: Abertura da geladeira via localização do usuário.
 
 ## 💻 Como Rodar o Projeto
 
