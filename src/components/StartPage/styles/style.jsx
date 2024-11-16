@@ -7,7 +7,7 @@ export const StartPageComponent = styled.div`
     justify-content: center;
     align-items: center;
 
-    @media (max-width: 820px) {
+    @media (max-width: 768px) {
         flex-direction: column;
         max-height: 91.6%;
         overflow-y: auto;
@@ -23,7 +23,7 @@ export const StartPageAlignComponent = styled.div`
     height: 100%;
     gap: 85px;
 
-    @media (max-width: 820px) {
+    @media (max-width: 768px) {
         padding-top: 25px;
         flex-direction: column;
         gap: 20px;
