@@ -18,7 +18,8 @@ import {
 import { 
     RiSunFoggyFill,
     RiSunFill,
-    RiMoonClearFill
+    RiMoonClearFill,
+    RiDatabase2Fill
 } from "react-icons/ri";
 
 export default function Header() {
@@ -30,11 +31,11 @@ export default function Header() {
             const now = new Date().getHours().toLocaleString('pt-BR');
             
             if(now >= 4 && now <= 12) {
-                setGreetings(<RiSunFoggyFill />);
+                setGreetings(<RiSunFoggyFill size={24} color='#FFF' title='Bom dia' />);
             } else if (now >= 12 && now <= 17) {
-                setGreetings(<RiSunFill />);
+                setGreetings(<RiSunFill size={24} color='#FFF' title='Boa tarde' />);
             } else if (now >= 18 && now <= 4) {
-                setGreetings(<RiMoonClearFill />);
+                setGreetings(<RiMoonClearFill size={24} color='#FFF' title='Boa noite' />);
             }
         }
 
@@ -54,9 +55,12 @@ export default function Header() {
                 }
                 <IoMdCart size={24} color="#FFF" />
             </div>
-            <span style={{ fontFamily: 'Inter', fontSize: 32, fontWeight: 500, color: '#FFF' }}>
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 20 }}>
                 {greetings}
-            </span>
+                <Link to='/start/stock?isManagement=true'>
+                    <RiDatabase2Fill size={24} color='#FFF' title='Gestão de Estoque' style={{ cursor: 'pointer' }} />
+                </Link>
+            </div>
         </HeaderComponent>
     )
 }
