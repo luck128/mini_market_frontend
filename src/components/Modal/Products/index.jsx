@@ -27,6 +27,12 @@ import {
     FaCartPlus 
 } from "react-icons/fa6";
 
+/**
+ * @description Serviços para funcionalidade do carrinho
+ */
+import getProductsListService from '../../../services/Cart/cart.services';
+import addToCartService from '../../../services/Cart/cart.services';
+
 export default function ProductsModal({ isOpen, onClose }) {
     const [cart, setCart] = useState(() => {
         const savedCart = localStorage.getItem('cart');
@@ -36,50 +42,19 @@ export default function ProductsModal({ isOpen, onClose }) {
 
     const getProductsList = async () => {
         try {
-            const response = await axios({
-                method: 'GET',
-                url: 'http://localhost:3030/api/v1/products/',
-                headers: {
-                    'Access-Control-Allow-Origin': 'http://localhost:3000'
-                }
-            });
-
-            setProductsList(response.data);
+            const response = await getProductsListService();
+            setProductsList(response);
         } catch (error) {
-            console.error(error);
+            toast.error(error);
         }
     };
 
     const addToCart = async (productId) => {
         try {
-            const response = await axios({
-                method: 'GET',
-                url: `http://localhost:3030/api/v1/products/${productId}`
-            });
-            const newProduct = response.data;
-
-            if(newProduct[0].quantity !== 0) {
-                setCart((prevCart) => {
-                    const existingProduct = prevCart.find(item => item.id === newProduct[0].id);
-        
-                    if (existingProduct) {
-                        return prevCart.map(item =>
-                            item.id === newProduct[0].id
-                                ? { ...item, quantity: item.quantity + 1 }
-                                : item
-                        );
-                    } else {
-                        return [...prevCart, { ...newProduct[0], quantity: 1, qty_stock: newProduct[0].quantity }];
-                    }
-                });
-        
-                localStorage.setItem('cart', JSON.stringify(cart));
-                toast.success('Produto adicionado ao carrinho!');
-            } else {
-                toast.error('O estoque do produto acabou, tente procurar outro semelhante.');
-            }
+            const response = await addToCartService();
+            toast.info(response);
         } catch (error) {
-            console.error(error);
+            toast.error(error);
         }
     }
 
