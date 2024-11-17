@@ -6,6 +6,7 @@ Interface para o sistema de autoatendimento em Mini Markets, permitindo que usu�
 
 - **[React](https://reactjs.org/):** Biblioteca para criação de interfaces interativas.
 - **[Chakra UI](https://chakra-ui.com/):** Biblioteca de componentes estilizados.
+- **[Styled Components](https://styled-components.com/):** Biblioteca para criar componentes com estilos encapsulados utilizando CSS-in-JS.
 
 ## 📂 Funcionalidades
 
