@@ -27,7 +27,7 @@ Interface para o sistema de autoatendimento em Mini Markets, permitindo que usu�
 
 ```bash
 # Clone o repositório:
-git clone <url-do-repositorio-frontend>
+git clone https://github.com/luck128/mini_market_frontend.git
 cd frontend
 
 Instale as dependências:
