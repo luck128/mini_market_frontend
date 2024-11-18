@@ -6,6 +6,7 @@ import {
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import "react-simple-keyboard/build/css/index.css";
 
 /**
  * @desc Listagem das páginas utilizadas na Aplicação

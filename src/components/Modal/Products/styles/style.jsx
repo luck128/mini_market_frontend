@@ -5,9 +5,14 @@ export const ListOfProductsComponent = styled.div`
     flex-direction: column;
     gap: 10px;
     width: 100%;
-    height: 82vh;
-    max-height: 82vh;
+    height: 55vh;
+    max-height: 55vh;
     overflow-y: auto;
+
+    @media (max-width: 768px) {
+        height: 63vh;
+        max-height: 63vh;
+    }
 `;
 
 export const ProductItemComponent = styled.div({
