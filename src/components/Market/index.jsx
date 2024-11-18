@@ -110,6 +110,12 @@ export default function Market() {
                 /* Buscar a quantidade atualizada do Estoque */
                 const qty_stock_number = qty_stock_updated.data[0].quantity;
 
+                /* Validação de quantidade maior que a do estoque */
+                if(item.quantity > qty_stock_number) {
+                    toast.warn('Não temos esse total de itens no inventário. Por favor, reduza a quantidade.');
+                    return;
+                }
+
                 const response = await axios({
                     headers: {
                         'Accept': 'application/json',
