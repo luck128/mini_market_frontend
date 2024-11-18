@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { toast } from 'react-toastify';
-import axios from 'axios';
+import Keyboard from "react-simple-keyboard";
 
 import {
     Modal,
@@ -10,8 +10,7 @@ import {
     ModalFooter,
     ModalBody,
     ModalCloseButton,
-    Button,
-    Checkbox
+    Input
 } from '@chakra-ui/react'
 
 import { 
@@ -38,6 +37,7 @@ export default function ProductsModal({ isOpen, onClose }) {
         return savedCart ? JSON.parse(savedCart) : [];
     });
     const [productsList, setProductsList] = useState([]);
+    const [input, setInput] = useState("");
 
     const getProductsList = async () => {
         try {
@@ -76,6 +76,10 @@ export default function ProductsModal({ isOpen, onClose }) {
         }
     };
 
+    const handleChange = (input) => {
+        setInput(input);
+    };    
+
     useEffect(() => {
         getProductsList();
     }, []);
@@ -93,7 +97,13 @@ export default function ProductsModal({ isOpen, onClose }) {
             <ModalCloseButton />
             <ModalBody>
                 <ListOfProductsComponent>
-                    {productsList.map((item, index) => {
+                    {productsList.filter((product) => {
+                        if (!input.trim()) {
+                            return true;
+                        }
+                        return product.name.toLowerCase().includes(input.toLowerCase());
+                    })
+                    .map((item, index) => {
                         const price = item.price;
                         const formattedPrice = `R$ ${price.replace(".",",")}`
 
@@ -112,10 +122,43 @@ export default function ProductsModal({ isOpen, onClose }) {
                 </ListOfProductsComponent>
             </ModalBody>
   
-            <ModalFooter>
-              <Button size="sm" colorScheme='red' mr={3} onClick={onClose} style={{ fontFamily: 'Inter' }}>
-                FECHAR
-              </Button>
+            <ModalFooter style={{ display: 'flex', flexDirection: 'column' }}>
+                <Input 
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    placeholder="Buscar produto..."
+                    style={{
+                        width: "100%",
+                        padding: "10px",
+                        fontSize: "14px",
+                        marginBottom: "20px",
+                        fontFamily: 'Inter'
+                    }}
+                />
+                <Keyboard
+                    onChange={handleChange}
+                    layout={{
+                        default: [
+                            "Q W E R T Y U I O P",
+                            "A S D F G H J K L",
+                            "{shift} Z X C V B N M {backspace}",
+                        ],
+                        shift: [
+                            "Q W E R T Y U I O P",
+                            "A S D F G H J K L",
+                            "{shift} Z X C V B N M {backspace}",
+                        ],
+                        numbers: ["1 2 3 4 5 6 7 8 9 0", "{backspace}", "{default}"],
+                    }}
+                    display={{
+                        "{space}": "Espaço",
+                        "{backspace}": "←",
+                        "{enter}": "Enter",
+                        "{shift}": "Shift",
+                        "{numbers}": "123",
+                        "{default}": "ABC",
+                    }}
+                />
             </ModalFooter>
           </ModalContent>
         </Modal>
